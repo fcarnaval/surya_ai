@@ -1,0 +1,34 @@
+<lib-header [version]="version"></lib-header>
+  
+<ion-content [fullscreen]="true">
+  <div class="responsive-container">
+    <ion-text class="ion-text-center">
+      <h1>histórico de saúde</h1>
+    </ion-text>
+  
+    <form [formGroup]="medicalHistoryForm" class="ion-margin-horizontal">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-textarea class="ion-margin-top" formControlName="medical_history" label="descreva seu histórico médico" labelPlacement="floating" name="medical_history"
+            helperText="doenças passadas, cirurgias, e tratamentos anteriores."></ion-textarea>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-textarea class="ion-margin-top" formControlName="current_symptons" label="sintomas atuais" labelPlacement="floating" name="current_symptons"
+            helperText="sintomas que você está experimentando atualmente."></ion-textarea>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-textarea class="ion-margin-top" formControlName="medication" label="medicação atual" labelPlacement="floating" name="medication"
+            helperText="medicamentos ou suplementos que você está tomando."></ion-textarea>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>
+
+<app-profile-flow-footer 
+  [isNextDisabled]="!medicalHistoryForm.valid"
+  (onPrevious)="prevStep()"
+  (onNext)="nextStep()">
+</app-profile-flow-footer>

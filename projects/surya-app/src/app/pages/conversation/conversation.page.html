@@ -1,0 +1,33 @@
+<lib-header [version]="version"></lib-header>
+
+<ion-content class="conversation-content">
+  <div class="chat-messages">
+    <ion-grid class="chat-container">
+      <ion-row *ngFor="let item of chatService.chat" [@messageAnimation]>
+        <ion-col [class.ia]="item.originator === 'Surya'" [class.usuario]="item.originator !== 'Surya'" size="12">
+          <div class="chat-bubble" 
+            [class.typing]="chatService.processing && item.originator === 'Surya'"
+            [innerHTML]="item.message"></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer class="footer-stack">
+  <ion-toolbar class="tabs-footer">
+    <ion-grid class="input-footer">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="3">
+          <ion-textarea [(ngModel)]="question" [autoGrow]="true" mode="md" fill="solid" placeholder="escreva aqui" (keydown)="onKeyDown($event)"></ion-textarea>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="onSubmit()" shape="round" [disabled]="chatService.processing">
+            <ion-icon slot="icon-only" name="send-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <app-tabs></app-tabs>
+  </ion-toolbar>
+</ion-footer>

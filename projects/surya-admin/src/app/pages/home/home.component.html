@@ -1,0 +1,98 @@
+<lib-header [version]="version" [title]="'surya admin'"></lib-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Admin Dashboard</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="admin-content">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="8">
+          <div class="welcome-section">
+            <h2>Bem-vindo ao Surya Admin</h2>
+            <p>Gerencie sua aplicação Surya a partir deste painel.</p>
+          </div>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="4" size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-icon name="people-outline"></ion-icon>
+                Usuários
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Gerencie contas de usuário e permissões</p>
+              <ion-button fill="outline" size="small" routerLink="/users">
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                Ver Usuários
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        
+        <ion-col size-md="4" size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-icon name="analytics-outline"></ion-icon>
+                Perfil
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Perfil do usuário, rotina, hábitos e objetivos</p>
+              <ion-button fill="outline" size="small" routerLink="/profile-info">
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                Ver Perfis
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="4" size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-icon name="settings-outline"></ion-icon>
+                Configurações
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Configure as configurações da aplicação</p>
+              <ion-button fill="outline" size="small">
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                Configurações
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        
+        <ion-col size-md="4" size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-icon name="medical-outline"></ion-icon>
+                Planos
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Gerencie planos de saúde e recomendações</p>
+              <ion-button fill="outline" size="small" routerLink="/plan-users">
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                Ver Planos
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-card class="ion-margin">
+    <ion-card-header>
+        <ion-card-title class="ion-no-padding ion-margin-top">{{mealTitle}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-list>
+            <ion-textarea class="ion-margin-top" [(ngModel)]="descricao" label="descrição" labelPlacement="floating"
+                helperText="descreva os alimentos ingeridos neste refeição"></ion-textarea>
+            <ion-input class="ion-margin-top" type="time" [(ngModel)]="horario" label="horário" presentation="time" labelPlacement="floating"
+                helperText="indique o horário aproximado em que costuma realizar esta refeição"></ion-input>
+            <ion-textarea class="ion-margin-top" [(ngModel)]="como_se_sente" label="como se sente" labelPlacement="floating"
+                helperText="como se sente após realizar esta refeição"></ion-textarea>
+        </ion-list>
+    </ion-card-content>
+</ion-card>

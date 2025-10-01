@@ -1,0 +1,103 @@
+.chat-container {
+  max-width: 900px;
+  padding: 16px;
+}
+  
+  .chat-bubble {
+    display: inline-block;
+    padding: 12px 16px;
+    border-radius: 18px;
+    max-width: 80%;
+    word-wrap: break-word;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    line-height: 1.4;
+  
+    p {
+      margin: 0.5em 0;
+    }
+  
+    ul {
+      padding-left: 1.2em;
+      margin: 0.5em 0;
+    }
+  
+    li {
+      margin-bottom: 0.25em;
+    }
+  }
+  
+  /* Estilo para mensagens da IA */
+  .ia {
+    text-align: left;
+  
+    .chat-bubble {
+      background-color: #f1f0f0;
+      color: #333;
+      border-bottom-left-radius: 0;
+    }
+  }
+  
+  /* Estilo para mensagens do usuário */
+  .usuario {
+    text-align: right;
+  
+    .chat-bubble {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      border-bottom-right-radius: 0;
+      margin-left: auto;
+    }
+  }
+  
+  .chat-bubble.typing::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: #888;
+    margin-left: 4px;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+
+/* ion-content manages its own scroll; add bottom padding for tabs + input */
+.conversation-content {
+  --padding-top: 0;
+  --padding-bottom: calc(56px + 64px);
+}
+
+/* Chat area fills the content viewport and scrolls */
+.chat-messages {
+  // height: 100%;
+  height: calc(100% - 24px);
+  overflow: auto;
+  // max-width: 900px; 
+  margin: 0 auto;
+  padding: 0 16px 8px;
+}
+
+/* Inline input container inside content (when used) */
+.input-container {
+  position: sticky;
+  bottom: 56px; /* height of tabs */
+  background: var(--ion-background-color, #fff);
+  border-top: 1px solid var(--ion-border-color, #e0e0e0);
+  padding: 8px 0;
+}
+
+.input-container ion-textarea,
+.input-footer ion-textarea {
+  --min-height: 40px;
+  --max-height: 80px;
+}
+
+/* Footer styles */
+.input-footer ion-toolbar,
+.tabs-footer {
+  --background: var(--ion-background-color, #fff);
+  --border-color: var(--ion-border-color, #e0e0e0);
+  --border-style: solid;
+  --border-width: 1px 0 0 0;
+}

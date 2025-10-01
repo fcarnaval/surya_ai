@@ -1,0 +1,14 @@
+ion-header {
+  ion-toolbar {
+    --background: var(--ion-color-primary);
+    --color: white;
+  }
+  
+  ion-title {
+    font-weight: 600;
+  }
+}
+
+lib-plans {
+  height: 100%;
+}

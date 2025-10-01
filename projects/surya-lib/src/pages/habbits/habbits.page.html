@@ -1,0 +1,212 @@
+<lib-header [version]="version"></lib-header>
+  
+  <ion-content [fullscreen]="true">
+    <div class="responsive-container">
+    
+    <ion-text class="ion-text-center">
+      <h1>rotina e hábitos</h1>
+    </ion-text>
+
+    <ion-item class="ion-margin-end">
+        <ion-text>
+            <h2>alimentação</h2>
+        </ion-text>
+    </ion-item>
+  
+    <form [formGroup]="habbitsForm" class="ion-padding-horizontal">
+      <!-- Diet Description -->
+      <ion-textarea class="ion-margin-bottom" formControlName="diet_description" label="informações sobre sua dieta" labelPlacement="floating" name="diet_description"
+      helperText="Por favor, informe quaisquer restrições alimentares, alimentos que não goste ou que não consuma. Se não houver nenhuma informação a ser adicionada, digite N/D para avançar."></ion-textarea>
+  
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+            <ion-text class="ion-margin-bottom">refeições realizadas</ion-text>
+        </ion-row>
+        <ion-row>
+            <ion-text class="instr-text">liste as refeições que você costuma realizar em um dia típico da sua rotina</ion-text>
+        </ion-row>
+      </ion-grid>
+
+      <!-- Botão para adicionar refeição -->
+      <ion-button class="ion-margin-top" expand="full" (click)="openModal()">Adicionar Refeição</ion-button>
+  
+      <!-- Lista de refeições adicionadas -->
+        <ion-list *ngIf="meals.length > 0">
+            <ion-item *ngFor="let meal of meals; let i = index" class="ion-no-padding">
+            <ion-label>{{ getMealLabel(meal.get('meal')?.value) }} - {{ meal.get('time')?.value }}</ion-label>
+            <ion-icon (click)="editMeal(i)" name="create-outline"></ion-icon>
+            <ion-icon class="ion-margin-start" (click)="deleteMeal(i)" name="trash-outline"></ion-icon>
+            </ion-item>
+        </ion-list>
+
+        <ion-item class="ion-margin-end ion-no-padding">
+            <ion-text>
+                <h2>atividade física</h2>
+            </ion-text>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+            <ion-toggle formControlName="activity">você pratica atividade física regular?</ion-toggle>
+        </ion-item>        
+
+    </form>
+
+    <ng-container *ngIf="habbitsForm.get('activity')?.value">
+
+        <form [formGroup]="activityForm" class="ion-padding-horizontal">
+
+            <ion-item class="ion-no-padding">
+                <ion-input formControlName="descr" label="descreva a atividade" labelPlacement="stacked" name="descr"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+                <ion-label position="stacked">frequência</ion-label>
+                <ion-select formControlName="frequency">
+                <ion-select-option value="L">1 a 2 vezes por semana</ion-select-option>
+                <ion-select-option value="M">3 a 4 vezes por semana</ion-select-option>
+                <ion-select-option value="H">5 vezes por semana ou mais</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+                <ion-label position="stacked">intensidade</ion-label>
+                <ion-select formControlName="intensity">
+                <ion-select-option value="L">Baixa</ion-select-option>
+                <ion-select-option value="M">Média</ion-select-option>
+                <ion-select-option value="H">Alta</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+        </form>
+
+    </ng-container>
+
+    <form [formGroup]="habbitsForm" class="ion-padding-horizontal">
+
+        <ion-item class="ion-margin-end ion-no-padding">
+            <ion-text>
+                <h2>vitalidade</h2>
+            </ion-text>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+            <ion-label position="stacked">como é sua disposição geral?</ion-label>
+            <ion-select formControlName="vitality">
+                <ion-select-option value="H">Alta: muita disposição, raramente se cansa</ion-select-option>
+                <ion-select-option value="C">Constante: disposição consiste, cansaço ocasionalmente</ion-select-option>
+                <ion-select-option value="V">Variável: disposição variável, frequente cansaço</ion-select-option>
+                <ion-select-option value="L">Baixo: baixa disposição, sentimento de fadiga constante</ion-select-option>
+            </ion-select>
+        </ion-item>  
+
+        <ion-item class="ion-margin-end ion-no-padding">
+            <ion-text>
+                <h2>sono</h2>
+            </ion-text>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+            <ion-label position="stacked">como define seu sono?</ion-label>
+            <ion-select formControlName="sleep_quality">
+                <ion-select-option value="D">Profundo</ion-select-option>
+                <ion-select-option value="R">Reparador</ion-select-option>
+                <ion-select-option value="L">Leve</ion-select-option>
+                <ion-select-option value="A">Agitado</ion-select-option>
+                <ion-select-option value="E">Excessivo</ion-select-option>
+                <ion-select-option value="I">Insuficiente</ion-select-option>
+            </ion-select>
+        </ion-item>  
+
+        <ion-item class="ion-no-padding">
+            <ion-label position="stacked">quanto tempo dorme em média?</ion-label>
+            <ion-input type="time" formControlName="sleep_time"></ion-input>
+        </ion-item>  
+
+        <ion-item class="ion-margin-end ion-no-padding">
+            <ion-text>
+                <h2>álcool</h2>
+            </ion-text>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+            <ion-toggle formControlName="alcohol">você consome bebidas alcoólicas?</ion-toggle>
+        </ion-item>    
+
+    </form>
+
+    <ng-container *ngIf="habbitsForm.get('alcohol')?.value">
+
+        <form [formGroup]="alcoholForm" class="ion-padding-horizontal">
+
+            <ion-item class="ion-no-padding">
+                <ion-input formControlName="descr" label="descreva as bebidas" labelPlacement="stacked" name="descr"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+                <ion-label position="stacked">frequência</ion-label>
+                <ion-select formControlName="frequency">
+                <ion-select-option value="L">1 a 2 vezes por semana</ion-select-option>
+                <ion-select-option value="M">3 a 4 vezes por semana</ion-select-option>
+                <ion-select-option value="H">5 vezes por semana ou mais</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+                <ion-label position="stacked">intensidade</ion-label>
+                <ion-select formControlName="intensity">
+                <ion-select-option value="L">Baixa</ion-select-option>
+                <ion-select-option value="M">Média</ion-select-option>
+                <ion-select-option value="H">Alta</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+        </form>
+
+    </ng-container>
+
+    <form [formGroup]="habbitsForm" class="ion-padding-horizontal">
+
+        <ion-item class="ion-margin-end ion-no-padding">
+            <ion-text>
+                <h2>fumo</h2>
+            </ion-text>
+        </ion-item>
+
+        <ion-item class="ion-no-padding">
+            <ion-toggle formControlName="smoke">você fuma?</ion-toggle>
+        </ion-item>    
+
+    </form>
+
+    <ng-container *ngIf="habbitsForm.get('smoke')?.value">
+
+        <form [formGroup]="smokeForm" class="ion-padding-horizontal">
+
+            <ion-item class="ion-no-padding">
+                <ion-input formControlName="descr" label="descreva o  tipo de fumo" labelPlacement="stacked" name="descr"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+                <ion-label position="stacked">frequência</ion-label>
+                <ion-select formControlName="frequency">
+                <ion-select-option value="L">1 a 2 vezes por semana</ion-select-option>
+                <ion-select-option value="M">3 a 4 vezes por semana</ion-select-option>
+                <ion-select-option value="H">5 vezes por semana ou mais</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+                <ion-label position="stacked">intensidade</ion-label>
+                <ion-select formControlName="intensity">
+                <ion-select-option value="L">Baixa</ion-select-option>
+                <ion-select-option value="M">Média</ion-select-option>
+                <ion-select-option value="H">Alta</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+        </form>
+
+    </ng-container>
+    </div>
+  </ion-content>
+  
+  <app-profile-flow-footer 
+    [isNextDisabled]="!habbitsForm.valid"
+    (onPrevious)="prevStep()"
+    (onNext)="nextStep()">
+  </app-profile-flow-footer>
+  

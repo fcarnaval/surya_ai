@@ -1,0 +1,368 @@
+.plan-container {
+  padding: 16px;
+  padding-bottom: 100px;
+  height: 100%;
+}
+
+.user-info {
+  text-align: center;
+  margin-bottom: 20px;
+  
+  h2 {
+    color: var(--ion-color-primary);
+    margin-bottom: 8px;
+  }
+  
+  .user-subtitle {
+    color: var(--ion-color-medium);
+    font-size: 1.1em;
+    margin: 8px 0 0 0;
+    font-weight: 500;
+  }
+}
+
+.dosha-card, .diagnosis-card {
+  margin-bottom: 16px;
+  
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ion-color-primary);
+    
+    ion-icon {
+      font-size: 1.2em;
+    }
+  }
+  
+  ion-card-content p {
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.recommendations {
+  margin-top: 24px;
+  
+  h3 {
+    color: var(--ion-color-primary);
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 1.3em;
+  }
+}
+
+.recommendation-card {
+  margin-bottom: 12px;
+  
+  ion-card-header {
+    padding-bottom: 8px;
+  }
+  
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1em;
+    color: var(--ion-color-secondary);
+    
+    ion-icon {
+      font-size: 1.1em;
+    }
+  }
+  
+  ion-card-content {
+    padding-top: 0;
+    
+    p {
+      line-height: 1.5;
+      margin: 0;
+      color: var(--ion-color-dark);
+    }
+  }
+}
+
+.plan-meta {
+  margin-top: 24px;
+  text-align: center;
+  
+  .updated-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--ion-color-medium);
+    font-size: 0.9em;
+    margin: 0;
+    
+    ion-icon {
+      font-size: 1em;
+    }
+  }
+}
+
+.loading-container, .generating-container, .no-plan-container, .profile-incomplete-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 268px;
+  
+  ion-spinner {
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+  
+  .subtitle {
+    font-size: 0.9em;
+    color: var(--ion-color-medium);
+    margin-top: 12px;
+  }
+}
+
+.profile-incomplete-container {
+  .profile-progress {
+    margin: 16px 0;
+    width: 100%;
+    max-width: 200px;
+    
+    ion-progress-bar {
+      height: 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    
+    .progress-text {
+      font-size: 0.9em;
+      color: var(--ion-color-medium);
+      font-weight: 500;
+    }
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+    
+    ion-button {
+      margin: 0;
+    }
+  }
+}
+
+ion-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  
+  app-tabs {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+  padding: 20px;
+  
+  ion-icon {
+    font-size: 3em;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: var(--ion-color-danger);
+    margin-bottom: 20px;
+  }
+}
+
+.status-card {
+  margin: 20px;
+  
+  ion-card-content {
+    padding: 32px 20px;
+    
+    h3 {
+      color: var(--ion-color-primary);
+      margin: 16px 0;
+    }
+    
+    p {
+      color: var(--ion-color-medium);
+      margin-bottom: 20px;
+    }
+    
+    ion-spinner {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+// Styles for complete plan display
+
+.plan-section-card {
+  margin-bottom: 16px;
+  
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ion-color-secondary);
+    font-size: 1.1em;
+    
+    ion-icon {
+      font-size: 1.2em;
+    }
+  }
+  
+}
+
+.plan-details {
+  .detail-item {
+    margin-bottom: 24px;
+    
+    .section-header {
+      color: var(--ion-color-secondary);
+      font-size: 1.1em;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: capitalize;
+      border-bottom: 2px solid var(--ion-color-light);
+      padding-bottom: 4px;
+    }
+    
+    .section-items {
+      margin-left: 8px;
+      
+      .detail-subitem {
+        margin-bottom: 12px;
+        
+        .detail-key {
+          color: var(--ion-color-primary);
+          font-size: 0.9em;
+          font-weight: 600;
+          margin-bottom: 6px;
+          text-transform: capitalize;
+        }
+      }
+    }
+    
+    .detail-value {
+      padding-left: 8px;
+      
+      p {
+        margin: 4px 0;
+        line-height: 1.5;
+        color: var(--ion-color-dark);
+      }
+      
+      ul {
+        margin: 4px 0;
+        padding-left: 20px;
+        
+        li {
+          margin: 2px 0;
+          line-height: 1.4;
+          color: var(--ion-color-dark);
+        }
+      }
+      
+      .object-item {
+        margin: 8px 0;
+        padding: 8px;
+        background-color: var(--ion-color-light);
+        border-radius: 4px;
+        
+        strong {
+          color: var(--ion-color-primary);
+        }
+        
+        div {
+          margin: 4px 0;
+          
+          span {
+            display: block;
+            margin: 2px 0;
+            font-size: 0.9em;
+          }
+        }
+      }
+    }
+  }
+}
+
+.plan-timestamps {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ion-color-light);
+  
+  .timestamp {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ion-color-medium);
+    font-size: 0.85em;
+    margin: 4px 0;
+    
+    ion-icon {
+      font-size: 1em;
+    }
+  }
+}
+
+// Styles for plan tabs segment
+.plan-tabs-segment {
+  margin-bottom: 16px;
+  background: var(--ion-color-light);
+  border-radius: 8px;
+  
+  .plan-tab-button {
+    ion-label {
+      font-size: 0.8em;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+    
+    ion-icon {
+      font-size: 1.1em;
+      margin-bottom: 2px;
+    }
+    
+    &.segment-button-checked {
+      --color: var(--ion-color-primary);
+      --color-checked: var(--ion-color-primary);
+      --indicator-color: var(--ion-color-primary);
+      
+      ion-icon {
+        color: var(--ion-color-primary) !important;
+      }
+      
+      ion-label {
+        color: var(--ion-color-primary) !important;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.tab-content-container {
+  padding: 16px;
+  
+  .plan-section-card {
+    margin-bottom: 16px;
+  }
+}

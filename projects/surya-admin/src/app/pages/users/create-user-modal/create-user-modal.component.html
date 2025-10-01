@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Criar Usuário</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">E-mail *</ion-label>
+            <ion-input 
+              type="email" 
+              formControlName="email"
+              placeholder="usuario@exemplo.com">
+            </ion-input>
+          </ion-item>
+          <div *ngIf="createUserForm.get('email')?.invalid && createUserForm.get('email')?.touched" class="error-message">
+            <ion-text color="danger">
+              <small *ngIf="createUserForm.get('email')?.errors?.['required']">E-mail é obrigatório</small>
+              <small *ngIf="createUserForm.get('email')?.errors?.['email']">E-mail inválido</small>
+            </ion-text>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Nome *</ion-label>
+            <ion-input 
+              type="text" 
+              formControlName="name"
+              placeholder="Nome completo">
+            </ion-input>
+          </ion-item>
+          <div *ngIf="createUserForm.get('name')?.invalid && createUserForm.get('name')?.touched" class="error-message">
+            <ion-text color="danger">
+              <small *ngIf="createUserForm.get('name')?.errors?.['required']">Nome é obrigatório</small>
+            </ion-text>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Telefone</ion-label>
+            <ion-input 
+              type="tel" 
+              formControlName="phone"
+              placeholder="(11) 99999-9999">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>
+              <h3>Usuário do aplicativo</h3>
+              <p>Se ativado, cria usuário completo com login. Se desativado, cria usuário apenas para registros (ex: importação do Typebot)</p>
+            </ion-label>
+            <ion-toggle
+              formControlName="appUser"
+              slot="end">
+            </ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="createUserForm.get('appUser')?.value">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>
+              <h3>Forçar alteração de senha no próximo login</h3>
+              <p>Se ativado, o usuário será obrigado a alterar a senha na primeira vez que fizer login</p>
+            </ion-label>
+            <ion-toggle
+              formControlName="forcePasswordChange"
+              slot="end">
+            </ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="form-actions">
+        <ion-col size="6">
+          <ion-button 
+            expand="block" 
+            fill="clear" 
+            (click)="cancel()"
+            [disabled]="isSubmitting">
+            Cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button 
+            expand="block" 
+            type="submit"
+            [disabled]="createUserForm.invalid || isSubmitting">
+            <span *ngIf="!isSubmitting">Criar</span>
+            <span *ngIf="isSubmitting">Criando...</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

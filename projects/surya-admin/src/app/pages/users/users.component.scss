@@ -1,0 +1,98 @@
+.users-content {
+  padding: 16px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  h2 {
+    margin: 0;
+    color: var(--ion-color-primary);
+  }
+
+  .header-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+}
+
+.search-container {
+  margin-bottom: 20px;
+  
+  ion-searchbar {
+    --background: var(--ion-color-light);
+    --border-radius: 8px;
+    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.user-card {
+  margin-bottom: 16px;
+  
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    ion-icon {
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  ion-card-subtitle {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+}
+
+.user-info,
+.user-dates {
+  p {
+    margin: 8px 0;
+    
+    strong {
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+.admin-badge {
+  margin-top: 16px;
+  
+  ion-chip {
+    margin: 4px 4px 4px 0;
+  }
+}
+
+.renew-password-section,
+.grant-access-section {
+  margin-top: 16px;
+  
+  ion-button {
+    --border-radius: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .header-buttons {
+      flex-direction: column;
+      gap: 8px;
+      
+      ion-button {
+        width: 100%;
+      }
+    }
+  }
+}

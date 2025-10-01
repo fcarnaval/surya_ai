@@ -1,0 +1,23 @@
+.responsive-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    
+    @media (min-width: 768px) {
+        padding: 0 32px;
+    }
+    
+    @media (min-width: 1024px) {
+        padding: 0 48px;
+    }
+}
+
+.instr-text {
+    color: rgb(115, 115, 115);
+    font-size: 12px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: 2em;
+}

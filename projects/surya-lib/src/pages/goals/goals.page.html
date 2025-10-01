@@ -1,0 +1,26 @@
+<lib-header [version]="version"></lib-header>
+  
+<ion-content [fullscreen]="true">
+  <div class="responsive-container">
+    <ion-text class="ion-text-center">
+      <h1>metas de saúde</h1>
+    </ion-text>
+  
+    <form [formGroup]="goalsForm" class="ion-margin-horizontal">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="8" size-lg="6" offset-md="2" offset-lg="3">
+            <ion-textarea class="ion-margin-top" formControlName="health_goals" label="suas metas" labelPlacement="floating" name="health_goals"
+            helperText="descreva o que deseja alcançar em relação a sua saúde."></ion-textarea>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>
+
+<app-profile-flow-footer 
+  [isNextDisabled]="!goalsForm.valid"
+  (onPrevious)="prevStep()"
+  (onNext)="nextStep()">
+</app-profile-flow-footer>

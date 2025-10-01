@@ -1,0 +1,246 @@
+.plan-users-content {
+  padding: 16px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  h2 {
+    margin: 0;
+    color: var(--ion-color-primary);
+  }
+
+  .header-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+}
+
+.filters-container {
+  margin-bottom: 20px;
+  
+  ion-searchbar {
+    --background: var(--ion-color-light);
+    --border-radius: 8px;
+    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+  }
+  
+  .filter-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+    
+    ion-item {
+      --background: var(--ion-color-light);
+      --border-radius: 8px;
+      --border-width: 0;
+      margin: 0;
+    }
+  }
+  
+  .filter-summary {
+    text-align: center;
+    
+    ion-chip {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.user-card {
+  margin-bottom: 16px;
+  
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    ion-icon {
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  ion-card-subtitle {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+}
+
+.user-info,
+.user-dates {
+  p {
+    margin: 8px 0;
+    
+    strong {
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+.plan-info-section {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: var(--ion-color-light);
+  border-radius: 8px;
+  
+  h4 {
+    margin: 0 0 16px 0;
+    color: var(--ion-color-primary);
+    font-size: 1.1rem;
+  }
+  
+  .plan-type-section {
+    margin-bottom: 20px;
+    padding: 12px;
+    background-color: var(--ion-color-step-50);
+    border-radius: 8px;
+    border: 1px solid var(--ion-color-step-150);
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    h5 {
+      margin: 0 0 12px 0;
+      color: var(--ion-color-dark);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      ion-icon {
+        color: var(--ion-color-primary);
+      }
+      
+      ion-chip {
+        margin-left: auto;
+      }
+    }
+  }
+  
+  .plan-details {
+    .plan-status {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      ion-spinner {
+        --color: var(--ion-color-tertiary);
+      }
+    }
+    
+    .plan-metadata {
+      margin-bottom: 12px;
+      
+      p {
+        margin: 4px 0;
+        font-size: 0.9rem;
+        
+        strong {
+          color: var(--ion-color-dark);
+        }
+      }
+    }
+    
+    .plan-actions {
+      text-align: right;
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      
+      ion-button {
+        --border-width: 1px;
+        --border-style: solid;
+        --border-radius: 8px;
+        
+        &[disabled] {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+    
+    .complete-plan-summary {
+      color: var(--ion-color-tertiary);
+      font-style: italic;
+      margin-top: 8px;
+    }
+  }
+  
+  .no-plan-actions {
+    text-align: center;
+    padding: 12px 0;
+    
+    ion-button {
+      --border-width: 1px;
+      --border-style: solid;
+      --border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    
+    .plan-description {
+      margin: 8px 0 0 0;
+      
+      small {
+        color: var(--ion-color-medium);
+        font-style: italic;
+        line-height: 1.4;
+      }
+    }
+  }
+  
+  .no-plan {
+    ion-item {
+      --background: transparent;
+      --color: var(--ion-color-medium);
+    }
+  }
+}
+
+.admin-badge {
+  margin-top: 16px;
+  
+  ion-chip {
+    margin: 4px 4px 4px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .header-buttons {
+      flex-direction: column;
+      gap: 8px;
+      
+      ion-button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .filter-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Complete Plan Modal */
+:global(.complete-plan-modal) {
+  --width: 90vw;
+  --max-width: 900px;
+  --height: 90vh;
+  --max-height: 800px;
+}

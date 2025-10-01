@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title size="large" class="ion-text-center">
+        detalhes da refeição
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+
+    <form [formGroup]="mealForm">
+
+        <ion-item>
+            <ion-label position="stacked">refeição</ion-label>
+            <ion-select formControlName="meal">
+                <ion-select-option *ngFor="let option of mealOptions" [value]="option.value">
+                    {{ option.label }}
+                  </ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ng-container *ngIf="mealForm?.get('meal')?.value">
+
+            <ion-item>
+                <ion-label position="stacked">alimentos consumidos</ion-label>
+                <ion-input type="text" formControlName="descr" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">horário</ion-label>
+                <ion-input type="time" formControlName="time"></ion-input>
+            </ion-item>
+
+        </ng-container>
+
+    </form>
+
+</ion-content>  
+
+<ion-footer collapse="fade">
+    <ion-toolbar class="ion-text-center">
+      <ion-button expand="full" (click)="cancel()" color="secondary">cancelar</ion-button>
+      <ion-button expand="full" (click)="confirm()" color="primary" [disabled]="!mealForm.valid">salvar</ion-button>
+    </ion-toolbar>
+  </ion-footer>

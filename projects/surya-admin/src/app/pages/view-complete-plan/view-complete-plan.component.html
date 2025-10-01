@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Plano Completo - {{ userName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <lib-plans 
+    [userId]="userId"
+    [showHeader]="false"
+    [showFooter]="false">
+  </lib-plans>
+</ion-content>

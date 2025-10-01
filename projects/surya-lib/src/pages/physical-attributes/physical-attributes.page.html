@@ -1,0 +1,95 @@
+<lib-header [version]="version"></lib-header>
+  
+  <ion-content [fullscreen]="true">
+    <div class="responsive-container">
+      <ion-text class="ion-text-center">
+        <h1>tipo de corpo</h1>
+      </ion-text>
+    
+      <form [formGroup]="physicalAttributesForm" class="ion-margin-top">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="6">
+              <ion-item>
+                <ion-label position="stacked">tipo de corpo</ion-label>
+                <ion-select formControlName="body_constitution" multiple="true">
+                  <ion-select-option value="C">Corpo Magro</ion-select-option>
+                  <ion-select-option value="C">Corpo Médio</ion-select-option>
+                  <ion-select-option value="C">Corpo Robusto</ion-select-option>
+                  <ion-select-option value="L">Leve</ion-select-option>
+                  <ion-select-option value="F">Flexível</ion-select-option>
+                  <ion-select-option value="A">Ágil</ion-select-option>
+                  <ion-select-option value="S">Estrutura Sólida</ion-select-option>
+                  <ion-select-option value="M">Musculatura Firme</ion-select-option>
+                  <ion-select-option value="R">Resistente</ion-select-option>
+                  <ion-select-option value="H">Pesado</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6">
+              <ion-item>
+                <ion-label position="stacked">temperatura corporal</ion-label>
+                <ion-select formControlName="body_temperature" multiple="true">
+                    <ion-select-option value="C">Sou friorento</ion-select-option>
+                    <ion-select-option value="B">Sou equilibrado</ion-select-option>
+                    <ion-select-option value="H">Sou calorento</ion-select-option>
+                    <ion-select-option value="F">Flutuações</ion-select-option>
+                    <ion-select-option value="R">Resistente ao calor</ion-select-option>
+                    <ion-select-option value="O">Resistente ao frio</ion-select-option>
+                    <ion-select-option value="E">Influência emocional</ion-select-option>
+                    <ion-select-option value="S">Variações sazonais</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6">
+              <ion-item>
+                <ion-label position="stacked">apetite</ion-label>
+                <ion-select formControlName="appetite" multiple="true">
+                    <ion-select-option value="H">Fome Intensa</ion-select-option>
+                    <ion-select-option value="F">Frequente</ion-select-option>
+                    <ion-select-option value="I">Apetite irregular</ion-select-option>
+                    <ion-select-option value="V">Variações ao longo do dia</ion-select-option>
+                    <ion-select-option value="S">Digestão lenta</ion-select-option>
+                    <ion-select-option value="L">Baixa fome</ion-select-option>
+                    <ion-select-option value="C">Fome consistente</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6">
+              <ion-item>
+                <ion-label position="stacked">aparência da pele</ion-label>
+                <ion-select formControlName="skin_appearance" multiple="true">
+                    <ion-select-option value="SM">Lisa</ion-select-option>
+                    <ion-select-option value="RO">Áspera</ion-select-option>
+                    <ion-select-option value="SE">Muito Sensível</ion-select-option>
+                    <ion-select-option value="RE">Mais Resistente</ion-select-option>
+                    <ion-select-option value="DR">Seca</ion-select-option>
+                    <ion-select-option value="OI">Oleosa</ion-select-option>
+                    <ion-select-option value="UN">Uniforme</ion-select-option>
+                    <ion-select-option value="SP">Descolorações</ion-select-option>
+                    <ion-select-option value="HO">Quente ao toque</ion-select-option>
+                    <ion-select-option value="CO">Fria ao toque</ion-select-option>
+                    <ion-select-option value="AC">Acne</ion-select-option>
+                    <ion-select-option value="RA">Erupções</ion-select-option>
+                    <ion-select-option value="PE">Descamada</ion-select-option>
+                    <ion-select-option value="RC">Reativa a mudanças climáticas</ion-select-option>
+                    <ion-select-option value="RD">Radiante</ion-select-option>
+                    <ion-select-option value="OP">Opaca</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </ion-content>
+  
+  <app-profile-flow-footer 
+    [isNextDisabled]="!physicalAttributesForm.valid"
+    (onPrevious)="prevStep()"
+    (onNext)="nextStep()">
+  </app-profile-flow-footer>
+  

@@ -1,0 +1,200 @@
+<lib-header [version]="version" [title]="'surya admin'"></lib-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Usuários</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="users-content">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <div class="page-header">
+            <ion-button fill="clear" routerLink="/home">
+              <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+              Voltar
+            </ion-button>
+            <h2>Gerenciar Usuários</h2>
+            <div class="header-buttons">
+              <ion-button fill="outline" color="primary" (click)="openCreateUserModal()">
+                <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                Criar Usuário
+              </ion-button>
+              <ion-button fill="solid" (click)="loadUsers()">
+                <ion-icon name="refresh-outline" slot="start"></ion-icon>
+                Atualizar
+              </ion-button>
+            </div>
+          </div>
+
+          <!-- Search Field -->
+          <div class="search-container">
+            <ion-searchbar
+              [(ngModel)]="searchTerm"
+              (ionInput)="onSearchInput($event)"
+              placeholder="Buscar por nome, email, telefone, tipo ou ID..."
+              show-clear-button="focus"
+              debounce="300">
+            </ion-searchbar>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Loading State -->
+      <ion-row *ngIf="loading" class="ion-justify-content-center">
+        <ion-col size="12" class="ion-text-center">
+          <ion-spinner></ion-spinner>
+          <p>Carregando usuários...</p>
+        </ion-col>
+      </ion-row>
+
+      <!-- Error State -->
+      <ion-row *ngIf="error" class="ion-justify-content-center">
+        <ion-col size="12">
+          <ion-card color="danger">
+            <ion-card-content>
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              <p>{{ error }}</p>
+              <ion-button fill="outline" color="light" (click)="loadUsers()">
+                Tentar Novamente
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <!-- Users List -->
+      <ion-row *ngIf="!loading && !error">
+        <ion-col size="12">
+          <ion-card *ngFor="let user of filteredUsers" class="user-card">
+            <ion-card-header>
+              <ion-card-title>
+                <ion-icon name="person-outline"></ion-icon>
+                {{ user.name }}
+              </ion-card-title>
+              <ion-card-subtitle>
+                <ion-badge [color]="getUserStatusColor(user.status)">
+                  {{ user.status }}
+                </ion-badge>
+                <ion-badge [color]="user.app_user ? 'primary' : 'secondary'">
+                  {{ user.app_user ? 'App User' : 'Registro' }}
+                </ion-badge>
+                <ion-badge [color]="user.is_admin ? 'warning' : 'success'">
+                  {{ user.is_admin ? 'Admin' : 'Usuário' }}
+                </ion-badge>
+                <ion-badge *ngIf="user.expired" color="danger">
+                  Expirado
+                </ion-badge>
+                <ion-badge [color]="getUserTypeColor(user.user_type)">
+                  {{ user.user_type }}
+                </ion-badge>
+              </ion-card-subtitle>
+            </ion-card-header>
+            
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size-md="6" size="12">
+                    <div class="user-info">
+                      <p><strong>ID:</strong> {{ user.user_id }}</p>
+                      <p><strong>Email:</strong> {{ user.email }}</p>
+                      <p *ngIf="user.phone"><strong>Telefone:</strong> {{ user.phone }}</p>
+                      <p><strong>Tipo:</strong> {{ user.user_type }}</p>
+                      <p><strong>App User:</strong> {{ user.app_user ? 'Sim' : 'Não' }}</p>
+                      <p><strong>Status:</strong> {{ user.status }}</p>
+                      <p><strong>Expirado:</strong> {{ user.expired ? 'Sim' : 'Não' }}</p>
+                    </div>
+                  </ion-col>
+                  <ion-col size-md="6" size="12">
+                    <div class="user-dates">
+                      <p><strong>Criado em:</strong> {{ formatDate(user.created_date) }}</p>
+                      <p><strong>Modificado em:</strong> {{ formatDate(user.last_modified_date) }}</p>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                
+                <!-- Admin Badge -->
+                <ion-row *ngIf="user.is_admin">
+                  <ion-col size="12">
+                    <div class="admin-badge">
+                      <ion-chip color="warning">
+                        <ion-icon name="shield-outline"></ion-icon>
+                        <ion-label>Administrador</ion-label>
+                      </ion-chip>
+                    </div>
+                  </ion-col>
+                </ion-row>
+
+                <!-- Renew Password Button (only for app users) -->
+                <ion-row *ngIf="user.expired && user.app_user">
+                  <ion-col size="12">
+                    <div class="renew-password-section">
+                      <ion-button 
+                        expand="block" 
+                        color="warning" 
+                        (click)="renewPassword(user)"
+                        [disabled]="renewingPassword === user.user_id">
+                        <ion-icon name="refresh-outline" slot="start"></ion-icon>
+                        <span *ngIf="renewingPassword !== user.user_id">Renovar</span>
+                        <span *ngIf="renewingPassword === user.user_id">Renovando...</span>
+                      </ion-button>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                
+                <!-- Non-app user info and actions -->
+                <ion-row *ngIf="!user.app_user">
+                  <ion-col size="12">
+                    <ion-item color="light">
+                      <ion-icon name="information-circle-outline" slot="start" color="medium"></ion-icon>
+                      <ion-label>
+                        <p>Este usuário é apenas um registro (ex: importado do Typebot) e não possui acesso ao aplicativo.</p>
+                      </ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                
+                <!-- Grant App Access Button -->
+                <ion-row *ngIf="!user.app_user">
+                  <ion-col size="12">
+                    <div class="grant-access-section">
+                      <ion-button 
+                        expand="block" 
+                        color="primary" 
+                        (click)="grantAppAccess(user)"
+                        [disabled]="grantingAccess === user.user_id">
+                        <ion-icon name="key-outline" slot="start"></ion-icon>
+                        <span *ngIf="grantingAccess !== user.user_id">Conceder Acesso ao App</span>
+                        <span *ngIf="grantingAccess === user.user_id">Concedendo Acesso...</span>
+                      </ion-button>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+          
+          <!-- Empty State -->
+          <ion-card *ngIf="filteredUsers.length === 0 && users.length > 0">
+            <ion-card-content class="ion-text-center">
+              <ion-icon name="search-outline" size="large"></ion-icon>
+              <h3>Nenhum usuário encontrado</h3>
+              <p>Nenhum usuário corresponde aos critérios de busca.</p>
+            </ion-card-content>
+          </ion-card>
+
+          <!-- No Users State -->
+          <ion-card *ngIf="users.length === 0">
+            <ion-card-content class="ion-text-center">
+              <ion-icon name="people-outline" size="large"></ion-icon>
+              <h3>Nenhum usuário cadastrado</h3>
+              <p>Não há usuários cadastrados no momento.</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

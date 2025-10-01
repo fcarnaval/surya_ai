@@ -1,0 +1,51 @@
+<lib-header [version]="version"></lib-header>
+
+<div *ngIf="confirmationMessage" class="confirmation-banner" @slideDown (click)="dismissConfirmation()">
+  <ion-icon name="checkmark-circle" color="success"></ion-icon>
+  <span>{{ confirmationMessage }}</span>
+  <ion-icon name="close" color="medium"></ion-icon>
+</div>
+
+<ion-content [fullscreen]="true" class="home-content">
+
+
+  <ion-grid class="ion-margin">
+    <ion-row class="ion-justify-content-center">
+        <ion-col size-md="3">
+            <div class="logo">
+                <ion-img src="assets/surya_logo_prd.png"></ion-img>
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size-md="3">
+            <p class="greetings">Olá {{first_name}}!</p>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size-md="4" *ngIf="!spinner.processing">
+            <!-- Show this if user has a plan -->
+            <div *ngIf="hasPlan"> 
+                <p>Considerando as informações que você nos forneceu, Surya criou um plano de saúde integrativo para você.</p>
+                <p>Para ver o plano, <a (click)="navigateToPlans()">clique aqui</a></p>
+            </div>
+            
+            <!-- Show this if plan is being generated -->
+            <div *ngIf="isGeneratingPlan">
+                <p>Seu plano de saúde integrativa está sendo gerado, em alguns instantes estará disponível.</p>
+            </div>
+            
+            <!-- Show this if user doesn't have a plan and it's not being generated -->
+            <div *ngIf="!hasPlan && !isGeneratingPlan">
+                <p>Por favor, preencha as informações do seu perfil pessoal para que Surya possa gerar seu plano de saúde integrativa.</p>
+                <p>Para preencher o perfil <a (click)="navigateToPersonalData()">clique aqui</a></p>
+            </div>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer class="tabs-footer ion-no-border">
+    <app-tabs></app-tabs>
+</ion-footer>

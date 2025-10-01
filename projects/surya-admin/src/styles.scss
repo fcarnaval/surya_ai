@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Target the actual rendered modal structure */
+ion-modal.create-user-modal {
+  --z-index: 20001;
+  --backdrop-opacity: 0.32;
+  --width: 90%;
+  --max-width: 500px;
+  --height: 60vh;
+  --max-height: 80vh;
+  --min-height: 400px;
+  
+  /* Ensure the modal content is positioned above backdrop */
+  app-create-user-modal {
+    position: relative !important;
+    z-index: 20002 !important;
+    background: white !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Ensure ion-content takes remaining space */
+  app-create-user-modal ion-content {
+    flex: 1 !important;
+    min-height: 300px !important;
+  }
+  
+  /* Style the header with primary color */
+  app-create-user-modal ion-header ion-toolbar {
+    --background: var(--ion-color-primary) !important;
+    --color: var(--ion-color-primary-contrast) !important;
+  }
+  
+  app-create-user-modal ion-header ion-title {
+    color: var(--ion-color-primary-contrast) !important;
+  }
+  
+  app-create-user-modal ion-header ion-button {
+    --color: var(--ion-color-primary-contrast) !important;
+  }
+}
+
+/* Ensure backdrop is visible */
+ion-backdrop {
+  display: block !important;
+  background: rgba(0, 0, 0, 0.32) !important;
+}
+
+/* Additional fallback for modal positioning */
+.create-user-modal {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  app-create-user-modal {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+}
+
+/* Plan View Modal Styles */
+ion-modal.plan-view-modal {
+  --z-index: 20001;
+  --backdrop-opacity: 0.32;
+  --width: 95%;
+  --max-width: 800px;
+  --height: 90%;
+  --max-height: 90%;
+  
+  /* Ensure the modal content is positioned above backdrop */
+  app-plan-view-modal {
+    position: relative !important;
+    z-index: 20002 !important;
+    background: white !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Ensure lib-plans takes remaining space */
+  app-plan-view-modal lib-plans {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  app-plan-view-modal lib-plans ion-content {
+    flex: 1 !important;
+  }
+  
+  /* Style the header with primary color */
+  app-plan-view-modal ion-header ion-toolbar {
+    --background: var(--ion-color-primary) !important;
+    --color: var(--ion-color-primary-contrast) !important;
+  }
+  
+  app-plan-view-modal ion-header ion-title {
+    color: var(--ion-color-primary-contrast) !important;
+  }
+  
+  app-plan-view-modal ion-header ion-button {
+    --color: var(--ion-color-primary-contrast) !important;
+  }
+}
+
+/* Additional fallback for plan view modal positioning */
+.plan-view-modal {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  app-plan-view-modal {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+}

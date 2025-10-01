@@ -1,0 +1,66 @@
+.app-title {
+    color: #032B17;
+    font-family: "Montserrat";
+    font-size: 48px;
+    text-align: center;
+}
+
+.message-row {
+    margin-top: 42px;
+}
+
+.app-message p {
+    color: #032B17;
+    font-family: "Montserrat";
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+}
+
+ion-input {
+    background-color: var(--ion-color-tertiary);
+    border: 1px solid var(--ion-color-primary);
+    border-radius: 4px;
+    padding: 0 18px !important;
+}
+
+ion-input {
+    height: 16px;
+    margin-top: 8px;
+}
+
+.login-button {
+    margin-top: 16px;
+    width: 40%;
+}
+
+.button-box {
+    display: flex;
+    justify-content: center;
+}
+
+.content-box {
+    padding: 16px;
+    height: 100vh;
+}
+
+.logo {
+    margin-bottom: 2rem;
+    justify-content: center;
+    display: flex;
+
+    ion-img {
+        max-width: 200px;
+        height: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .logo ion-img {
+        max-width: 250px;
+    }
+}
+
+.item-inner {
+  border-bottom: none !important;
+}

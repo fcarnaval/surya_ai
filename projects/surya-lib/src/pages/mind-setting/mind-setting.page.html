@@ -1,0 +1,68 @@
+<lib-header [version]="version"></lib-header>
+  
+  <ion-content [fullscreen]="true">
+    <div class="responsive-container">
+      <ion-text class="ion-text-center">
+        <h1>tipo de mente</h1>
+      </ion-text>
+    
+      <form [formGroup]="mindSettingForm" class="ion-margin-top">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">estado emocional</ion-label>
+                <ion-select formControlName="emotional" name="emotional" required multiple="true">
+                    <ion-select-option value="Q">Tranquilo</ion-select-option>
+                    <ion-select-option value="W">Preocupação</ion-select-option>
+                    <ion-select-option value="I">Impaciência</ion-select-option>
+                    <ion-select-option value="C">Contentamento</ion-select-option>
+                    <ion-select-option value="M">Melancolia</ion-select-option>
+                    <ion-select-option value="D">Indecisão</ion-select-option>
+                    <ion-select-option value="A">Animação</ion-select-option>
+                    <ion-select-option value="P">Apreensão</ion-select-option>
+                    <ion-select-option value="S">Insegurança</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">temperamento</ion-label>
+                <ion-select formControlName="temper" name="temper" required multiple="true">
+                    <ion-select-option value="S">Sereno</ion-select-option>
+                    <ion-select-option value="I">Impulsivo</ion-select-option>
+                    <ion-select-option value="A">Analítico</ion-select-option>
+                    <ion-select-option value="J">Alegre</ion-select-option>
+                    <ion-select-option value="O">Otimista</ion-select-option>
+                    <ion-select-option value="T">Irritável</ion-select-option>
+                    <ion-select-option value="R">Reflexivo</ion-select-option>
+                    <ion-select-option value="P">Introspectivo</ion-select-option>
+                    <ion-select-option value="N">Introvertido</ion-select-option>
+                    <ion-select-option value="X">Extrovertido</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">estilo de vida</ion-label>
+                <ion-select formControlName="life_style" name="life_style" required multiple="true">
+                    <ion-select-option value="P">Prefere rotina, avesso a mudanças</ion-select-option>
+                    <ion-select-option value="E">Ativo, gosta de mudanças</ion-select-option>
+                    <ion-select-option value="C">Gosta de desafios, competitivo</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </ion-content>
+  
+  <app-profile-flow-footer 
+    [isNextDisabled]="!mindSettingForm.valid"
+    (onPrevious)="prevStep()"
+    (onNext)="nextStep()">
+  </app-profile-flow-footer>
+  

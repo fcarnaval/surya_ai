@@ -1,0 +1,52 @@
+<lib-header [version]="version"></lib-header>
+  
+  <ion-content [fullscreen]="true">
+    <div class="responsive-container">
+      <ion-text class="ion-text-center">
+        <h1>dados cadastrais</h1>
+      </ion-text>
+    
+      <form [formGroup]="personalDataForm" class="ion-margin-top">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item class="ion-margin-end">
+                <ion-label position="stacked">data de nascimento</ion-label>
+                <ion-input type="date" formControlName="birthdate" name="birthdate" required></ion-input>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item class="ion-margin-end">
+                <ion-label position="stacked">gênero</ion-label>
+                <ion-select formControlName="gender" name="gender" required>
+                  <ion-select-option value="M">Masculino</ion-select-option>
+                  <ion-select-option value="F">Feminino</ion-select-option>
+                  <ion-select-option value="O">Outro</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item class="ion-margin-end">
+                <ion-label position="stacked">ocupação</ion-label>
+                <ion-input type="text" formControlName="occupation" name="occupation" required></ion-input>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12">
+              <ion-textarea class="ion-margin-horizontal ion-padding-end remove-padding-end" formControlName="location" label="onde vive" labelPlacement="stacked" name="location"
+              helperText="informe a cidade/estado onde passa a maior parte do seu tempo." required></ion-textarea>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </ion-content>
+  
+  <app-profile-flow-footer 
+    [isNextDisabled]="!personalDataForm.valid"
+    (onPrevious)="prevStep()"
+    (onNext)="nextStep()">
+  </app-profile-flow-footer>
+  

@@ -1,0 +1,156 @@
+<lib-header [version]="version"></lib-header>
+  
+  <ion-content [fullscreen]="true">
+    <div class="responsive-container">
+      <ion-text class="ion-text-center">
+        <h1>excretas &#40;secreções&#41;</h1>
+      </ion-text>
+    
+      <form [formGroup]="excrementsForm">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item class="ion-margin-horizontal ion-no-padding">
+                <ion-text>
+                  <h2>urina</h2>
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">cor e clareza</ion-label>
+                <ion-select formControlName="urine_quality" required multiple="true">
+                  <ion-select-option value="C">Clara</ion-select-option>
+                  <ion-select-option value="L">Amarelo claro</ion-select-option>
+                  <ion-select-option value="D">Amarelo escuro</ion-select-option>
+                  <ion-select-option value="B">Turva</ion-select-option>
+                  <ion-select-option value="S">Olor Forte</ion-select-option>
+                  <ion-select-option value="F">Espumosa</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">frequência</ion-label>
+                <ion-select formControlName="urine_frequency" required multiple="true">
+                  <ion-select-option value="I">Pouco frequente ou com esforço</ion-select-option>
+                  <ion-select-option value="R">Regular, sem problemas</ion-select-option>
+                  <ion-select-option value="F">Frequente, mas normal</ion-select-option>
+                  <ion-select-option value="T">Muito frequente ou incontinente</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">odor</ion-label>
+                <ion-select formControlName="urine_smell" required multiple="true">
+                  <ion-select-option value="O">Quase sem odor</ion-select-option>
+                  <ion-select-option value="W">Odor perceptível, mas não acentuado</ion-select-option>
+                  <ion-select-option value="U">Odor forte e desagradável</ion-select-option>
+                  <ion-select-option value="S">Odor muito forte e incomum</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item class="ion-margin-horizontal ion-no-padding">
+                <ion-text>
+                  <h2>fezes</h2>
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">consistência</ion-label>
+                <ion-select formControlName="feces_consistency" required multiple="true">
+                  <ion-select-option value="H">Muito duras ou constipadas</ion-select-option>
+                  <ion-select-option value="F">Bem formadas e firmes</ion-select-option>
+                  <ion-select-option value="S">Levemente moles, mas formadas</ion-select-option>
+                  <ion-select-option value="L">Soltas ou diarreicas</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">frequência</ion-label>
+                <ion-select formControlName="feces_frequency" required multiple="true">
+                  <ion-select-option value="T">Duas ou mais vezes por dia, regular</ion-select-option>
+                  <ion-select-option value="O">Uma vez por dia, regular</ion-select-option>
+                  <ion-select-option value="E">A cada dois dias, irregular</ion-select-option>
+                  <ion-select-option value="L">Menos frequente que a cada dois dias</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">cor</ion-label>
+                <ion-select formControlName="feces_color" required multiple="true">
+                  <ion-select-option value="L">Marrom Claro</ion-select-option>
+                  <ion-select-option value="M">Marrom Médio</ion-select-option>
+                  <ion-select-option value="D">Marrom Escuro ou preto</ion-select-option>
+                  <ion-select-option value="B">Pálido ou com presença de sangue</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">odores</ion-label>
+                <ion-select formControlName="feces_smell" required multiple="true">
+                  <ion-select-option value="W">Leve, não desagradável</ion-select-option>
+                  <ion-select-option value="M">Moderado, perceptível</ion-select-option>
+                  <ion-select-option value="S">Forte e desagradável</ion-select-option>
+                  <ion-select-option value="O">Extremamente forte e ofensivo</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-item class="ion-margin-horizontal ion-no-padding">
+                <ion-text>
+                  <h2>suor</h2>
+                </ion-text>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">quantidade</ion-label>
+                <ion-select formControlName="sweat_quantity" required multiple="true">
+                  <ion-select-option value="H">Suor abundante, frequentemente sem esforço físico</ion-select-option>
+                  <ion-select-option value="M">Quantidade moderada, durante esforço físico</ion-select-option>
+                  <ion-select-option value="L">Suor leve, raramente perceptível</ion-select-option>
+                  <ion-select-option value="N">Quase ausência de suor, mesmo com esforço físico</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="12" size-md="6" size-lg="4">
+              <ion-item>
+                <ion-label position="stacked">odor</ion-label>
+                <ion-select formControlName="sweat_smell" required multiple="true">
+                  <ion-select-option value="H">Forte e facilmente perceptível</ion-select-option>
+                  <ion-select-option value="M">Moderado, mas não ofensivo</ion-select-option>
+                  <ion-select-option value="L">Leve e geralmente não perceptível</ion-select-option>
+                  <ion-select-option value="N">Sem odor perceptível</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </ion-content>
+  
+  <app-profile-flow-footer 
+    [isNextDisabled]="!excrementsForm.valid"
+    (onPrevious)="prevStep()"
+    (onNext)="nextStep()">
+  </app-profile-flow-footer>
+  

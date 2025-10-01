@@ -1,0 +1,26 @@
+// Shared styles for tabs footer across pages
+.tabs-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  border: none;
+  
+  &.ion-no-border {
+    border: none;
+  }
+}
+
+// Content styling for pages with fixed footer
+.conversation-content,
+.home-content {
+  padding-bottom: 80px;
+}
+
+.home-content {
+  // Any additional home-specific content styles can go here
+}
+
+.conversation-content {
+  // Any additional conversation-specific content styles can go here
+}

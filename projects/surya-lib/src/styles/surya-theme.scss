@@ -1,0 +1,147 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../assets/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../assets/fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ion-color-primary: #005e73;
+  --ion-color-primary-rgb: 0, 94, 115;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #004f62;
+  --ion-color-primary-tint: #1a6e83;
+
+	--ion-color-secondary: #00BA87;
+	--ion-color-secondary-rgb: 0,186,135;
+	--ion-color-secondary-contrast: #ffffff;
+	--ion-color-secondary-contrast-rgb: 0,0,0;
+	--ion-color-secondary-shade: #00a477;
+	--ion-color-secondary-tint: #1ac193;
+
+	--ion-color-tertiary: #F6F8FC;
+	--ion-color-tertiary-rgb: 246,248,252;
+	--ion-color-tertiary-contrast: #000000;
+	--ion-color-tertiary-contrast-rgb: 0,0,0;
+	--ion-color-tertiary-shade: #d8dade;
+	--ion-color-tertiary-tint: #f7f9fc;
+
+  --ion-color-light: #f6f6f6;
+  --ion-color-light-rgb: 246, 246, 246;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #dcdcdc;
+  --ion-color-light-tint: #f8f8f8;
+
+  --ion-color-dark: #1f1f1f;
+  --ion-color-dark-rgb: 31, 31, 31;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1b1b1b;
+  --ion-color-dark-tint: #353535;
+
+    --ion-color-musk: #032B17;
+	--ion-color-musk-rgb: 3,43,23;
+	--ion-color-musk-contrast: #ffffff;
+	--ion-color-musk-contrast-rgb: 255,255,255;
+	--ion-color-musk-shade: #032614;
+	--ion-color-musk-tint: #1c402e;
+
+  --ion-color-white: #FFFFFF;
+	--ion-color-white-rgb: 255,255,255;
+	--ion-color-white-contrast: #000000;
+	--ion-color-white-contrast-rgb: 0,0,0;
+	--ion-color-white-shade: #e0e0e0;
+	--ion-color-white-tint: #ffffff;
+
+     --ion-background-color: transparent;
+    --ion-border-radius: 8px
+
+  }
+
+  .ion-color-musk {
+	--ion-color-base: var(--ion-color-musk);
+	--ion-color-base-rgb: var(--ion-color-musk-rgb);
+	--ion-color-contrast: var(--ion-color-musk-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-musk-contrast-rgb);
+	--ion-color-shade: var(--ion-color-musk-shade);
+	--ion-color-tint: var(--ion-color-musk-tint);
+}
+
+.ion-color-white {
+	--ion-color-base: var(--ion-color-white);
+	--ion-color-base-rgb: var(--ion-color-white-rgb);
+	--ion-color-contrast: var(--ion-color-white-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-white-contrast-rgb);
+	--ion-color-shade: var(--ion-color-white-shade);
+	--ion-color-tint: var(--ion-color-white-tint);
+}
+
+* {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.logo ion-img::part(image) {
+    border-radius: 8px;
+}
+
+.center-title {
+    text-align: center;
+}
+
+ion-spinner {
+    height: 80px;
+    width: 80px;
+}
+
+.spinner-box {
+    align-items: center;
+    background-color: rgba(255,255,255,0.5);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    position: absolute;
+    width: 100vw;
+    z-index: 1;
+}
+
+.version {
+    font-size: 12px;
+}
+
+.logo {
+    margin: 1em auto 0;
+    width: 75%;
+}
+
+ion-button.ion-color-primary::part(native) {
+    background: linear-gradient(135deg, hsl(202 89% 52%), hsl(168 83% 40%) 50%, hsl(262 83% 57%)) !important;
+    color: var(--ion-color-primary-contrast);
+}
+
+ion-button.ion-color-secondary::part(native) {
+    background: white !important;
+    color: var(--ion-color-secondary) !important;
+    border: 1px solid var(--ion-color-secondary) !important;
+}
+
+ion-textarea.custom {
+    --background: #F5ECDF;
+}
+
+.alert-wrapper, .modal-default {
+    background-color: white !important;
+}

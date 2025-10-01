@@ -1,0 +1,50 @@
+.profile-flow-footer {
+  .footer-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    
+    .footer-btn {
+      --border-radius: 8px;
+      height: 48px;
+      margin: 0;
+    }
+    
+    // Mobile: stacked buttons full width
+    @media (max-width: 767px) {
+      .footer-btn {
+        width: 100%;
+      }
+    }
+    
+    // Tablet and desktop: side by side buttons
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: center;
+      gap: 16px;
+      
+      .footer-btn {
+        flex: 0 0 auto;
+        width: 140px;
+        height: 40px;
+      }
+      
+      .prev-btn {
+        order: 1;
+      }
+      
+      .next-btn {
+        order: 2;
+      }
+    }
+    
+    // Large screens: even smaller buttons
+    @media (min-width: 1024px) {
+      .footer-btn {
+        width: 120px;
+        height: 36px;
+      }
+    }
+  }
+}

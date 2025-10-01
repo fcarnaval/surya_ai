@@ -1,0 +1,283 @@
+<lib-header [version]="version" [title]="'surya admin'"></lib-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Usuários e Planos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="plan-users-content">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <div class="page-header">
+            <ion-button fill="clear" routerLink="/home">
+              <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+              Voltar
+            </ion-button>
+            <h2>Gerenciar Usuários e Planos</h2>
+            <div class="header-buttons">
+              <ion-button fill="solid" (click)="loadUsers()">
+                <ion-icon name="refresh-outline" slot="start"></ion-icon>
+                Atualizar
+              </ion-button>
+            </div>
+          </div>
+
+          <!-- Search and Filters -->
+          <div class="filters-container">
+            <ion-searchbar
+              [(ngModel)]="searchTerm"
+              (ionInput)="onSearchInput($event)"
+              placeholder="Buscar por nome, email, telefone, tipo ou ID..."
+              show-clear-button="focus"
+              debounce="300">
+            </ion-searchbar>
+            
+            <div class="filter-controls">
+              <ion-item>
+                <ion-label>Status do Plano</ion-label>
+                <ion-select [(ngModel)]="planStatusFilter" (ionSelectionChange)="onPlanStatusFilterChange($event)" placeholder="Todos">
+                  <ion-select-option value="all">Todos</ion-select-option>
+                  <ion-select-option value="has_plan">Com Plano</ion-select-option>
+                  <ion-select-option value="plan_empty">Plano Vazio</ion-select-option>
+                  <ion-select-option value="processing">Processando</ion-select-option>
+                  <ion-select-option value="no_plan">Sem Plano</ion-select-option>
+                </ion-select>
+              </ion-item>
+              
+              <ion-item>
+                <ion-label>Tipo de Usuário</ion-label>
+                <ion-select [(ngModel)]="userTypeFilter" (ionSelectionChange)="onUserTypeFilterChange($event)" placeholder="Todos">
+                  <ion-select-option value="all">Todos</ion-select-option>
+                  <ion-select-option value="app_user">App Users</ion-select-option>
+                  <ion-select-option value="non_app_user">Não App Users</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
+            
+            <div class="filter-summary">
+              <ion-chip color="primary">
+                <ion-label>{{ getFilterSummary() }}</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Loading State -->
+      <ion-row *ngIf="loading" class="ion-justify-content-center">
+        <ion-col size="12" class="ion-text-center">
+          <ion-spinner></ion-spinner>
+          <p>Carregando usuários...</p>
+        </ion-col>
+      </ion-row>
+
+      <!-- Error State -->
+      <ion-row *ngIf="error" class="ion-justify-content-center">
+        <ion-col size="12">
+          <ion-card color="danger">
+            <ion-card-content>
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              <p>{{ error }}</p>
+              <ion-button fill="outline" color="light" (click)="loadUsers()">
+                Tentar Novamente
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <!-- Users List -->
+      <ion-row *ngIf="!loading && !error">
+        <ion-col size="12">
+          <ion-card *ngFor="let user of filteredUsers" class="user-card">
+            <ion-card-header>
+              <ion-card-title>
+                <ion-icon name="person-outline"></ion-icon>
+                {{ user.name }}
+              </ion-card-title>
+              <ion-card-subtitle>
+                <ion-badge [color]="getPlanStatusColor(user.plan_status)">
+                  {{ getPlanStatusText(user.plan_status) }}
+                </ion-badge>
+                <ion-badge [color]="user.app_user ? 'primary' : 'secondary'">
+                  {{ user.app_user ? 'App User' : 'Registro' }}
+                </ion-badge>
+                <ion-badge [color]="getUserTypeColor(user.user_type)">
+                  {{ user.user_type }}
+                </ion-badge>
+              </ion-card-subtitle>
+            </ion-card-header>
+            
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size-md="6" size="12">
+                    <div class="user-info">
+                      <p><strong>ID:</strong> {{ user.user_id }}</p>
+                      <p><strong>Email:</strong> {{ user.email }}</p>
+                      <p *ngIf="user.phone"><strong>Telefone:</strong> {{ user.phone }}</p>
+                      <p><strong>Tipo:</strong> {{ user.user_type }}</p>
+                      <p><strong>App User:</strong> {{ user.app_user ? 'Sim' : 'Não' }}</p>
+                    </div>
+                  </ion-col>
+                  <ion-col size-md="6" size="12">
+                    <div class="user-dates">
+                      <p><strong>Criado em:</strong> {{ formatDate(user.created_date) }}</p>
+                      <p><strong>Modificado em:</strong> {{ formatDate(user.last_modified_date) }}</p>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                
+                <!-- Plan Information -->
+                <ion-row>
+                  <ion-col size="12">
+                    <div class="plan-info-section">
+                      <h4>Informações dos Planos</h4>
+                      
+                      <!-- Simplified Plan Section -->
+                      <div class="plan-type-section">
+                        <h5>
+                          <ion-icon name="document-text-outline"></ion-icon>
+                          Plano Simplificado
+                          <ion-chip [color]="getPlanTypeColor(user, 'simplified')" size="small">
+                            <ion-label>{{ getPlanTypeStatus(user, 'simplified') }}</ion-label>
+                          </ion-chip>
+                        </h5>
+                        
+                        <div *ngIf="user.has_simplified_plan && user.simplified_plan_info; else noSimplifiedPlanTemplate" class="plan-details">
+                          <div class="plan-metadata">
+                            <p><strong>Criado em:</strong> {{ formatDate(user.simplified_plan_info.created_at) }}</p>
+                            <p><strong>Atualizado em:</strong> {{ formatDate(user.simplified_plan_info.updated_at) }}</p>
+                            <p><strong>Tamanho:</strong> {{ user.simplified_plan_info.content_length }} caracteres</p>
+                            <p *ngIf="user.simplified_plan_info.summary"><strong>Resumo:</strong> {{ user.simplified_plan_info.summary }}</p>
+                          </div>
+                          
+                          <div class="plan-actions">
+                            <ion-button 
+                              size="small" 
+                              color="primary" 
+                              fill="outline"
+                              (click)="viewPlan(user)"
+                              [disabled]="user.simplified_plan_info.status === 'processing' || user.simplified_plan_info.status === 'plan_empty'">
+                              <ion-icon name="eye-outline" slot="start"></ion-icon>
+                              Ver Plano Simplificado
+                            </ion-button>
+                            <ion-button 
+                              size="small" 
+                              color="secondary" 
+                              fill="clear"
+                              (click)="recreateSimplifiedPlan(user)"
+                              [disabled]="loading || user.simplified_plan_info.status === 'processing'">
+                              <ion-icon name="refresh-outline" slot="start"></ion-icon>
+                              Recriar
+                            </ion-button>
+                          </div>
+                        </div>
+                        
+                        <ng-template #noSimplifiedPlanTemplate>
+                          <div class="no-plan-actions">
+                            <ion-button 
+                              size="small" 
+                              color="success" 
+                              fill="outline"
+                              (click)="createSimplifiedPlan(user)"
+                              [disabled]="loading">
+                              <ion-icon name="add-outline" slot="start"></ion-icon>
+                              Criar Plano Simplificado
+                            </ion-button>
+                          </div>
+                        </ng-template>
+                      </div>
+
+                      <!-- Complete Plan Section -->
+                      <div class="plan-type-section">
+                        <h5>
+                          <ion-icon name="library-outline"></ion-icon>
+                          Plano Completo
+                          <ion-chip [color]="getPlanTypeColor(user, 'complete')" size="small">
+                            <ion-label>{{ getPlanTypeStatus(user, 'complete') }}</ion-label>
+                          </ion-chip>
+                        </h5>
+                        
+                        <div *ngIf="user.has_complete_plan && user.complete_plan_info && (user.complete_plan_info.status === 'has_plan' || user.complete_plan_info.status === 'processing' || user.complete_plan_info.status === 'plan_empty'); else noCompletePlanTemplate" class="plan-details">
+                          <div class="plan-metadata">
+                            <p><strong>Criado em:</strong> {{ formatDate(user.complete_plan_info.created_at) }}</p>
+                            <p><strong>Atualizado em:</strong> {{ formatDate(user.complete_plan_info.updated_at) }}</p>
+                            <p><strong>Tamanho:</strong> {{ user.complete_plan_info.content_length }} caracteres</p>
+                            <p *ngIf="user.complete_plan_info.summary"><strong>Resumo:</strong> {{ user.complete_plan_info.summary }}</p>
+                          </div>
+                          
+                          <div class="plan-actions">
+                            <ion-button 
+                              size="small" 
+                              color="primary" 
+                              fill="outline"
+                              (click)="viewCompletePlan(user)"
+                              [disabled]="user.complete_plan_info.status === 'processing' || user.complete_plan_info.status === 'plan_empty'">
+                              <ion-icon name="eye-outline" slot="start"></ion-icon>
+                              Ver Plano Completo
+                            </ion-button>
+                            <ion-button 
+                              size="small" 
+                              color="secondary" 
+                              fill="clear"
+                              (click)="recreateCompletePlan(user)"
+                              [disabled]="loading || user.complete_plan_info.status === 'processing'">
+                              <ion-icon name="refresh-outline" slot="start"></ion-icon>
+                              Recriar
+                            </ion-button>
+                          </div>
+                        </div>
+                        
+                        <ng-template #noCompletePlanTemplate>
+                          <div class="no-plan-actions">
+                            <ion-button 
+                              size="small" 
+                              color="primary" 
+                              fill="outline"
+                              (click)="createCompletePlan(user)"
+                              [disabled]="loading">
+                              <ion-icon name="add-outline" slot="start"></ion-icon>
+                              Criar Plano Completo
+                            </ion-button>
+                            <p class="plan-description">
+                              <small>
+                                O plano completo incluirá: sono, dieta, mente, movimento, rotina e tratamentos.
+                              </small>
+                            </p>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+          
+          <!-- Empty State -->
+          <ion-card *ngIf="filteredUsers.length === 0 && users.length > 0">
+            <ion-card-content class="ion-text-center">
+              <ion-icon name="search-outline" size="large"></ion-icon>
+              <h3>Nenhum usuário encontrado</h3>
+              <p>Nenhum usuário corresponde aos critérios de busca e filtros.</p>
+            </ion-card-content>
+          </ion-card>
+
+          <!-- No Users State -->
+          <ion-card *ngIf="users.length === 0">
+            <ion-card-content class="ion-text-center">
+              <ion-icon name="people-outline" size="large"></ion-icon>
+              <h3>Nenhum usuário cadastrado</h3>
+              <p>Não há usuários cadastrados no momento.</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

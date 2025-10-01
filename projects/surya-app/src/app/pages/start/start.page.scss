@@ -1,0 +1,46 @@
+.app-title {
+    color: #032B17;
+    font-family: "Montserrat";
+    font-size: 48px;
+    text-align: center;
+}
+
+.message-row {
+    margin-top: 24px;
+}
+
+.app-message p {
+    color: #032B17;
+    font-family: "Montserrat";
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+}
+
+ion-input {
+    background-color: #F5ECDF;
+    border: 1px solid #795548;
+    border-radius: 32px;
+    padding: 0 18px !important;
+}
+
+ion-input {
+    height: 16px;
+    margin-top: 12px;
+}
+
+.login-button {
+    margin-top: 16px;
+    width: 40%;
+}
+
+.login-button button {
+    border-radius: 12px !important;
+}
+
+.button-box {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 500px;
+}
